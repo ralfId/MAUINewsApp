@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiNewsApp.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:appModels="clr-namespace:MauiNewsApp.Models.AppModels"
+    xmlns:models="clr-namespace:MauiNewsApp.Models"
+    xmlns:vm="clr-namespace:MauiNewsApp.ViewModels"
+    x:DataType="vm:MainPageVM">
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, auto,auto,*" RowSpacing="20">
+
+            <CollectionView
+                Grid.Row="1"
+                ItemsLayout="HorizontalList"
+                ItemsSource="{Binding Ob_Categories}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="appModels:Category">
+                        <Frame
+                            Margin="5,0"
+                            Padding="10,5"
+                            BackgroundColor="White">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageVM}}, Path=GetNewsCommand}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Label FontSize="15" Text="{Binding name}">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsSelected}"
+                                        TargetType="Label"
+                                        Value="true">
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding IsSelected}"
+                                        TargetType="Label"
+                                        Value="false">
+                                        <Setter Property="TextColor" Value="Black" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Frame.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsSelected}"
+                                    TargetType="Frame"
+                                    Value="true">
+                                    <Setter Property="BackgroundColor" Value="Black" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding IsSelected}"
+                                    TargetType="Frame"
+                                    Value="false">
+                                    <Setter Property="BackgroundColor" Value="White" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--  First article  -->
+            <Frame
+                Grid.Row="2"
+                Margin="20,10"
+                Padding="0"
+                CornerRadius="25">
+                <Grid RowDefinitions="auto, auto, auto" RowSpacing="20">
+
+                    <Frame
+                        Padding="0"
+                        CornerRadius="25"
+                        IsClippedToBounds="True">
+                        <Image
+                            Grid.RowSpan="2"
+                            Aspect="Fill"
+                            HeightRequest="200"
+                            Source="{Binding ArticleNews.image}" />
+
+                    </Frame>
+
+                    <Label
+                        Grid.Row="2"
+                        Margin="0"
+                        Padding="10,0,0,10"
+                        FontAttributes="Bold"
+                        FontSize="Title"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding ArticleNews.title}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Row="1"
+                        Margin="0,0,10,0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="End"
+                        Text="{Binding ArticleNews.publishedAt, StringFormat='{0:dddd, dd MMMM yyyy}'}" />
+
+                </Grid>
+
+            </Frame>
+
+            <CollectionView
+                Grid.Row="3"
+                ItemsSource="{Binding Ob_News}"
+                VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Article">
+                        <Frame
+                            Margin="20,10"
+                            Padding="0"
+                            CornerRadius="10">
+                            <!--<Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command=""/>
+                            </Frame.GestureRecognizers>-->
+                            <Grid ColumnDefinitions="auto, *">
+
+                                <Frame
+                                    Grid.Column="0"
+                                    Padding="0"
+                                    CornerRadius="10"
+                                    IsClippedToBounds="True">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="90"
+                                        Source="{Binding image}"
+                                        WidthRequest="100" />
+
+                                </Frame>
+
+                                <Grid
+                                    Grid.Column="1"
+                                    Padding="7,10,7,0"
+                                    RowDefinitions="50, auto">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        HorizontalOptions="Center"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding title}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Margin="0,0,10,10"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="End"
+                                        Text="{Binding publishedAt, StringFormat='{0:dddd, dd MMMM yyyy}'}" />
+                                </Grid>
+
+                                <!--<VerticalStackLayout>
+                                    <Label Text="{Binding title}" />
+                                    <Label Text="{Binding description}" />
+                                    <Label Text="{Binding content}" />
+                                    <Label Text="{Binding url}" />
+                                    <Image Source="{Binding image}" WidthRequest="150" />
+                                    <Label Text="{Binding publishedAt}" />
+                                    <Label Text="{Binding source.name}" />
+                                    <Label Text="{Binding source.url}" />
+                                </VerticalStackLayout>-->
+                            </Grid>
+
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
