@@ -13,6 +13,7 @@ namespace MauiNewsApp.Models.AppModels
     }
     public class Category
     {
+        public int Id { get; set; }
         public string name { get; set; }
         public bool IsSelected { get; set; } = false;
     }

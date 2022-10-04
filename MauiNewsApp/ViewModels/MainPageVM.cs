@@ -38,27 +38,23 @@ namespace MauiNewsApp.ViewModels
 
         [ObservableProperty]
         string _selectedCategory;
+
         public void LoadCategoriesSources()
         {
 
             CategoriesLst = OptionsList.GetCategories();
+            CategoriesLst[0].IsSelected = true;
             Ob_Categories = new ObservableCollection<Category>(CategoriesLst);
         }
 
-        [RelayCommand]
-        public void SetOption(){ IsCategoryOrSource = !IsCategoryOrSource; }
 
         [RelayCommand]
         public async Task GetNews(Category category)
         {
-            foreach (var item in CategoriesLst)
-            {
-                if (item.name == category.name)
-                    item.IsSelected = true;
-                else
-                    item.IsSelected = false;
-            }
-            Ob_Categories = new ObservableCollection<Category>(CategoriesLst);
+            SetSegmentedControl(category);
+            
+
+
             var newsData = await _apiService.GetNewsByCategory(category.name);
             var data = newsData.ToList();
 
@@ -68,6 +64,19 @@ namespace MauiNewsApp.ViewModels
 
         }
 
-        
+        private void SetSegmentedControl(Category category)
+        {
+            var oldCateg = Ob_Categories.Where(x => x.IsSelected == true).FirstOrDefault();
+
+            var oldSelecction = oldCateg;
+            oldSelecction.IsSelected = false;
+
+            var newSelecction = category;
+            newSelecction.IsSelected = true;
+
+            Ob_Categories[Ob_Categories.IndexOf(oldCateg)] = oldSelecction;
+            Ob_Categories[Ob_Categories.IndexOf(category)] = newSelecction;
+
+        }
     }
 }

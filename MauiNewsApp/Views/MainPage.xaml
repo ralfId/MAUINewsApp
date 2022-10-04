@@ -8,8 +8,8 @@
     xmlns:vm="clr-namespace:MauiNewsApp.ViewModels"
     x:DataType="vm:MainPageVM">
 
-    <ScrollView>
-        <Grid RowDefinitions="auto, auto,auto,*" RowSpacing="20">
+    <ScrollView VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+        <Grid RowDefinitions="auto, auto,auto,*" RowSpacing="20" Margin="20,0" >
 
             <CollectionView
                 Grid.Row="1"
@@ -18,7 +18,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="appModels:Category">
                         <Frame
-                            Margin="5,0"
+                            Margin="0,0,10,0"
                             Padding="10,5"
                             BackgroundColor="White">
                             <Frame.GestureRecognizers>
@@ -61,18 +61,18 @@
             <!--  First article  -->
             <Frame
                 Grid.Row="2"
-                Margin="20,10"
+                Margin="0,10"
                 Padding="0"
                 CornerRadius="25">
                 <Grid RowDefinitions="auto, auto, auto" RowSpacing="20">
 
                     <Frame
                         Padding="0"
-                        CornerRadius="25"
+                        CornerRadius="0"
                         IsClippedToBounds="True">
                         <Image
                             Grid.RowSpan="2"
-                            Aspect="Fill"
+                            Aspect="AspectFill"
                             HeightRequest="200"
                             Source="{Binding ArticleNews.image}" />
 
@@ -102,45 +102,43 @@
             <CollectionView
                 Grid.Row="3"
                 ItemsSource="{Binding Ob_News}"
-                VerticalOptions="FillAndExpand">
+                VerticalOptions="FillAndExpand"
+                Margin="0,0,0,50">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Article">
                         <Frame
-                            Margin="20,10"
+                            Margin="0,10"
                             Padding="0"
                             CornerRadius="10">
                             <!--<Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command=""/>
                             </Frame.GestureRecognizers>-->
-                            <Grid ColumnDefinitions="auto, *">
+                            <Grid ColumnDefinitions="100, *">
 
                                 <Frame
                                     Grid.Column="0"
                                     Padding="0"
-                                    CornerRadius="10"
+                                    CornerRadius="0"
                                     IsClippedToBounds="True">
                                     <Image
                                         Aspect="AspectFill"
-                                        HeightRequest="90"
-                                        Source="{Binding image}"
-                                        WidthRequest="100" />
+                                        Source="{Binding image}" />
 
                                 </Frame>
 
                                 <Grid
                                     Grid.Column="1"
                                     Padding="7,10,7,0"
-                                    RowDefinitions="50, auto">
+                                    RowDefinitions="auto, auto"
+                                    RowSpacing="15">
                                     <Label
                                         FontAttributes="Bold"
                                         FontSize="16"
                                         HorizontalOptions="Center"
-                                        LineBreakMode="WordWrap"
                                         Text="{Binding title}" />
                                     <Label
                                         Grid.Row="1"
                                         Margin="0,0,10,10"
-                                        FontAttributes="Bold"
                                         HorizontalOptions="End"
                                         Text="{Binding publishedAt, StringFormat='{0:dddd, dd MMMM yyyy}'}" />
                                 </Grid>

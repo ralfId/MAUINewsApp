@@ -8,15 +8,15 @@ namespace MauiNewsApp.Helpers
         {
             List<Category> categoriesList = new List<Category>
             {
-                new Category{name="breaking-news", IsSelected=false},
-                new Category{name="business", IsSelected=false},
-                new Category{name="entertainment", IsSelected=false},
-                new Category{name="health", IsSelected=false},
-                new Category{name="science", IsSelected=false},
-                new Category{name="sports", IsSelected=false},
-                new Category{name="technology", IsSelected=false},
+                new Category{ Id= 1, name="breaking-news", IsSelected=false},
+                new Category{ Id= 2, name="business", IsSelected=false},
+                new Category{ Id= 3, name="entertainment", IsSelected=false},
+                new Category{ Id= 4, name="health", IsSelected=false},
+                new Category{ Id= 5, name="science", IsSelected=false},
+                new Category{ Id= 6, name="sports", IsSelected=false},
+                new Category{ Id= 7,name="technology", IsSelected=false},
             };
-            
+
             return categoriesList;
         }
 
