@@ -2,6 +2,8 @@
 using MauiNewsApp.Helpers;
 using MauiNewsApp.Models;
 using MauiNewsApp.Models.AppModels;
+using MauiNewsApp.Services;
+using MauiNewsApp.Views;
 using System.Collections.ObjectModel;
 using static Microsoft.Maui.Controls.Internals.Profile;
 
@@ -9,9 +11,12 @@ namespace MauiNewsApp.ViewModels
 {
     public partial class MainPageVM : BaseVM
     {
-        private IApiServiceManager _apiService;
-        public MainPageVM(IApiServiceManager apiService)
+        private readonly IApiServiceManager _apiService;
+        private readonly INavigationService _navigationService;
+
+        public MainPageVM(IApiServiceManager apiService, INavigationService navigationService)
         {
+            _navigationService = navigationService;
             _apiService = apiService;
             Init();
         }
@@ -52,7 +57,7 @@ namespace MauiNewsApp.ViewModels
         public async Task GetNews(Category category)
         {
             SetSegmentedControl(category);
-            
+
 
 
             var newsData = await _apiService.GetNewsByCategory(category.name);
@@ -77,6 +82,23 @@ namespace MauiNewsApp.ViewModels
             Ob_Categories[Ob_Categories.IndexOf(oldCateg)] = oldSelecction;
             Ob_Categories[Ob_Categories.IndexOf(category)] = newSelecction;
 
+        }
+
+
+        [RelayCommand]
+        public async Task NavToArticleDetail(object obj = null)
+        {
+            if (obj != null)
+            {
+               var article = obj as Article;
+
+                await _navigationService.NavigateToAsync(nameof(NewsDetailPage), new Dictionary<string, object> { ["article"] = article });
+            }
+            else
+            {
+                await _navigationService.NavigateToAsync(nameof(NewsDetailPage), new Dictionary<string, object> { ["article"] = ArticleNews });
+
+            }
         }
     }
 }

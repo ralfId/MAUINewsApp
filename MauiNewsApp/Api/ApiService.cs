@@ -1,4 +1,5 @@
-﻿using MauiNewsApp.Helpers;
+﻿using MauiNewsApp.Api;
+using MauiNewsApp.Helpers;
 using MauiNewsApp.Models;
 using Refit;
 using System;
