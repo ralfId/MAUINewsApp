@@ -4,6 +4,7 @@ Simple news UI built with MAUI, consuming the [gnews.io](https://gnews.io/) API
 
 ## Features:
 * MAUI
+* MVVM
 * [Refit](https://github.com/reactiveui/refit)
 
 ### Android
