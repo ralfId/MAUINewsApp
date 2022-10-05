@@ -77,17 +77,11 @@
                         </Frame.GestureRecognizers>
                         <Grid RowDefinitions="auto, auto, auto" RowSpacing="20">
 
-                            <Frame
-                        Padding="0"
-                        CornerRadius="0"
-                        IsClippedToBounds="True">
-                                <Image
-                            Grid.RowSpan="2"
+                            <Image
                             Aspect="AspectFill"
                             HeightRequest="200"
                             Source="{Binding ArticleNews.image}" />
 
-                            </Frame>
 
                             <Label
                         Grid.Row="2"
@@ -101,9 +95,9 @@
                         VerticalOptions="Center" />
                             <Label
                         Grid.Row="1"
-                        Margin="0,0,10,0"
+                        Margin="10,0,10,0"
                         FontAttributes="Bold"
-                        HorizontalOptions="End"
+                        HorizontalOptions="Start"
                         Text="{Binding ArticleNews.publishedAt, StringFormat='{0:dddd, dd MMMM yyyy}'}" />
 
                         </Grid>
