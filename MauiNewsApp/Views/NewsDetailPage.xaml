@@ -63,7 +63,7 @@
 
                     <Label Grid.Row="1" Text="{Binding Article.description}" FontSize="17" FontAttributes="Bold"/>
                     <Label Grid.Row="2" Text="{Binding Article.content}" FontSize="17"/>
-                    <Label Grid.Row="3" Text=" continue reading on the website" TextDecorations="Underline" TextColor="Blue">
+                    <Label Grid.Row="3" Text="Continue reading on the website" TextDecorations="Underline" TextColor="Blue">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenNewsInBrowserCommand}"/>
                         </Label.GestureRecognizers>
