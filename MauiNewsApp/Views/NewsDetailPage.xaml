@@ -3,21 +3,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="MauiNewsApp.Views.NewsDetailPage"
              xmlns:vm="clr-namespace:MauiNewsApp.ViewModels"
-             Title="NewsDetailPage"
-             x:DataType="vm:NewsDetailPageVM" BackgroundColor="Blue">
+             xmlns:icon="clr-namespace:MauiNewsApp.Helpers"
+             Shell.NavBarIsVisible="False"
+             x:DataType="vm:NewsDetailPageVM" Padding="0" >
     <ScrollView>
-        <Grid RowDefinitions="400, 30, *">
-            <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Article.image}"  />
-            <Grid>
+        <Grid RowDefinitions="40,250, auto, auto,50, *" Padding="0">
 
-                <Label Text="{Binding Article.title}" VerticalOptions="End"/>
+            <Image Grid.RowSpan="5" Aspect="AspectFill" Source="{Binding Article.image}"  />
+            <!--Custom navbar-->
+            <Grid Grid.Row="0" >
+                <ImageButton CornerRadius="0" HorizontalOptions="Start" Padding="5,0"  TranslationX="-11" BackgroundColor="#33000000"
+                             Command="{Binding GoBackCommand}">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="{Static icon:BoxIcons.BxChevronLeft}" FontFamily="BI" Size="35" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Text="{Static icon:BoxIcons.BxDotsVerticalRounded}" FontFamily="BI" VerticalOptions="Start"
+                       FontSize="30" HorizontalOptions="End"  TextColor="White" Padding="10,0" />
+
             </Grid>
 
-            <Grid Grid.Row="1" Grid.RowSpan="2" BackgroundColor="Red" VerticalOptions="FillAndExpand">
-                
-                 
 
-            </Grid>
+
+            <StackLayout Grid.Row="2" Grid.RowSpan="3" BackgroundColor="#99000000"/>
+            <!--Source and datetime-->
+            <HorizontalStackLayout Grid.Row="2" Spacing="10" Padding="20,20,20,10">
+
+                <Frame Padding="10,5">
+                    <Label Text="{Binding Article.source.name}" FontAttributes="Bold" FontSize="Caption"/>
+
+                </Frame>
+                <Frame Padding="10,5">
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="{Static icon:BoxIcons.BxTime}" FontFamily="BI" VerticalOptions="Center" FontSize="Caption"/>
+                        <Label Text="{Binding Article.publishedAt, StringFormat='{0:MMMM dd, yyyy}'}" FontAttributes="Bold" FontSize="Caption"/>
+                    </HorizontalStackLayout>
+
+                </Frame>
+            </HorizontalStackLayout>
+
+            <!--title-->
+            <Label Grid.Row="3" Text="{Binding Article.title}" VerticalOptions="End" FontAttributes="Bold" FontSize="Title"  TextColor="White" Margin="20,5,20,20"/>
+
+
+            <Border Grid.Row="4" Grid.RowSpan="2"  VerticalOptions="FillAndExpand" Margin="-2" Padding="0,0,0,50" BackgroundColor="White">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="25,25,0,0"/>
+                </Border.StrokeShape>
+
+                <Grid Padding="20" RowDefinitions="30,auto,auto, auto" RowSpacing="20">
+
+                    <Grid ColumnDefinitions="*,*" >
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Static icon:BoxIcons.BxBookmarkPlus}" FontFamily="BI" VerticalOptions="Center" FontSize="30"/>
+                            <Label Text="{Static icon:BoxIcons.BxShareAlt}" FontFamily="BI" VerticalOptions="Center" FontSize="30"/>
+                        </HorizontalStackLayout>
+                        <Label Grid.Column="1" Text="{Static icon:BoxIcons.BxHeart}" FontFamily="BI" VerticalOptions="Center"  FontSize="30" HorizontalOptions="End"/>
+                    </Grid>
+
+                    <Label Grid.Row="1" Text="{Binding Article.description}" FontSize="17" FontAttributes="Bold"/>
+                    <Label Grid.Row="2" Text="{Binding Article.content}" FontSize="17"/>
+                    <Label Grid.Row="3" Text=" continue reading on the website" TextDecorations="Underline" TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenNewsInBrowserCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </Grid>
+            </Border>
+
+
         </Grid>
     </ScrollView>
 </ContentPage>

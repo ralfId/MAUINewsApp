@@ -16,6 +16,13 @@ namespace MauiNewsApp.ViewModels
 
         [ObservableProperty]
         Article article;
+
+
+        [RelayCommand]
+        public async Task OpenNewsInBrowser()
+        {
+            await Browser.OpenAsync(article.url);
+        }
     }
 }
 

@@ -32,7 +32,16 @@ namespace MauiNewsApp.Api
                 {
                     var data = await response.Content.ReadFromJsonAsync<News>();
 
-                    return data.articles;
+                    return data.articles.Select( x =>  new Article
+                    {
+                        title = x.title,
+                        description = x.description,
+                        content = x.content.Substring(0, x.content.IndexOf("[")),
+                        url = x.url,
+                        image = x.image,
+                        publishedAt = x.publishedAt,
+                        source = x.source
+                    });
                 }
 
                 return default;

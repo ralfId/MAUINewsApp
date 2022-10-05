@@ -52,6 +52,7 @@
 	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 	  <None Remove="Views\UI\" />
 	  <None Remove="Services\" />
+	  <None Remove="Xamarin.Essentials.Interfaces" />
 	</ItemGroup>
 
 	<ItemGroup>
